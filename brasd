@@ -1,0 +1,37 @@
+warn("Commands Loaded")
+local prefix = ";"
+
+game.Players.LocalPlayer.PlayerScripts.prevent:Destroy()
+game.Players.LocalPlayer.Chatted:Connect(function(message)
+    local split = message:split(" ")
+    if split[1] == prefix.."kick" then
+        local yes = split[2]
+        local res = split[3]
+        warn("Kick requested")
+        game.Workspace.Script.ScreenGui.Frame.RemoteEvent:FireServer(yes, res)
+        warn("Kick sent")
+    end
+end)
+
+game.Players.LocalPlayer.Chatted:Connect(function(message)
+    local split = message:split(" ")
+    if split[1] == prefix.."ban" then
+        local yes = split[2]
+        local res = split[3]
+        warn("Ban requested")
+        game.Workspace.Script.ScreenGui.Frame.RemoteEvent2:FireServer(yes, res)
+        warn("Ban sent")
+    end
+end)
+
+game.Players.LocalPlayer.Chatted:Connect(function(message)
+    if message:lower() == prefix.."shutdown" then
+        for i,v in pairs(game.Players:GetChildren()) do
+            if v:IsA("Player") then
+                warn("Shutdown Requested")
+                game.Workspace.Script.ScreenGui.Frame.RemoteEvent:FireServer(v.Name, "whatsup skids | get shutdown by brewsploit l0000l | brew >> everything")
+                warn("Shutdown Sent")
+            end
+        end
+    end
+end)
